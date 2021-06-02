@@ -1,8 +1,0 @@
-{
-    "server": {
-        "protocol": "HTTP",
-        "username": "zanzocam-bot",
-        "password": "esperimento",
-        "url": "http://46.101.245.13/uploads/"
-    }
-}
