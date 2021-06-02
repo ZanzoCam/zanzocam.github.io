@@ -1,0 +1,12 @@
+#!/home/s/projects/raspicam/zanzocam/venv/bin/python3.7
+# EASY-INSTALL-ENTRY-SCRIPT: 'zanzocam','console_scripts','z-ui'
+__requires__ = 'zanzocam'
+import re
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw?|\.exe)?$', '', sys.argv[0])
+    sys.exit(
+        load_entry_point('zanzocam', 'console_scripts', 'z-ui')()
+    )
