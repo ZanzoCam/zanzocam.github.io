@@ -11,6 +11,7 @@ This steps gives you a SD card that can connect to your WiFi network, so that yo
 - Add empty `ssh` file in the `boot` partition
 - Add `config.txt` file in the `boot` partition (if it exists already, delete it)
     - Content:
+
 ```
 # Disable the rainbow splash screen
 disable_splash=1
@@ -30,8 +31,10 @@ disable_camera_led=1  # optional, if you don't want the led to glow
 # Disable Bluetooth
 dtoverlay=disable-bt
 ```
+
 - Change `/etc/wpa_supplicant/wpa_supplicant.conf` on `rootfs` with your local wifi data
     - Example content:
+
 ```
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -42,6 +45,7 @@ network={
     psk="PASSWORD"
 }
 ```
+
 - Boot the Pi with this SD card.
 - SSH into it. Assuming your router's IP is something like 192.168.1.0 (mind the first three numbers and change them accordingly in the commands below):
     - Find its IP with `nmap -p 22 192.168.1.0/24`. In the list that appears, one of the devices should be your Raspberry Pi (find it by the name or by exclusion).
@@ -73,6 +77,7 @@ This step installs a few libraries required for the webcam to work.
     - Update locales: `sudo update-locale it_IT.UTF-8`
 
 Note: this procedure might raise some Perl errors, like:
+
 ```
 perl: warning: Setting locale failed.
 perl: warning: Please check that your locale settings:
@@ -90,6 +95,7 @@ perl: warning: Please check that your locale settings:
     are supported and installed on your system.
 perl: warning: Falling back to the standard locale ("C").
 ```
+
 These are due to a directive on your local machine, in `/etc/ssh/ssh_config`: `SendEnv LANG LC_*`.
 Comment it out to avoid such errors from arising on your Pi.
 
@@ -104,10 +110,12 @@ Comment it out to avoid such errors from arising on your Pi.
 - Setup cronjob to turn off HDMI at reboot:
     - `sudo nano /etc/cron.d/no-hdmi`
     - Content:
+
 ```
 # Disable the HDMI port (to save power)
 @reboot /usr/bin/tvservice -o
 ```
+
 - Disable the swap (swaps tends to "burn" SD cards very fast due to the very frequent writes. Turns out the Raspberry Pi has quite enough RAM to work without swap):
   - `sudo dphys-swapfile swapoff`
   - `sudo dphys-swapfile uninstall`
@@ -137,6 +145,7 @@ Instructions found [here](https://www.raspberryconnect.com/projects/65-raspberry
 - Edit `hostapd` configuration file to create a network called `zanzocam-setup` and password `webcamdelrifugio` (on WiFi channel 8):
     - `sudo nano /etc/hostapd/hostapd.conf`
     - Content:
+
 ```
 # 2.4GHz setup wifi 80211 b,g,n
 interface=wlan0
@@ -159,6 +168,7 @@ country_code=IT
 ieee80211n=1
 ieee80211d=1
 ```    
+
 - Edit `hostapd` defaults
     - `sudo nano /etc/default/hostapd`
     - Change `#DAEMON_CONF=""` into `DAEMON_CONF="/etc/hostapd/hostapd.conf"`
@@ -166,6 +176,7 @@ ieee80211d=1
 - Edit `dnsmasq` configuration:
     - `sudo nano /etc/dnsmasq.conf`
     - Add at the bottom:
+
 ```
 #AutoHotspot Config
 #stop DNSmasq from using resolv.conf
@@ -175,9 +186,11 @@ interface=wlan0
 bind-interfaces
 dhcp-range=10.0.0.50,10.0.0.150,12h
 ```
+
 - Modify the `interfaces` file:
     - `sudo nano /etc/network/interfaces`
     - Must be equal to:
+
 ```
 # interfaces(5) file used by ifup(8) and ifdown(8) 
 
@@ -187,12 +200,14 @@ dhcp-range=10.0.0.50,10.0.0.150,12h
 # Include files from /etc/network/interfaces.d: 
 source-directory /etc/network/interfaces.d 
 ```
+
 - Stop `dhcpcd` from starting the wifi network, so that the `autohotspot` script in the next step can work:
     - `sudo nano /etc/dhcpcd.conf`
     - Add at the bottom: `nohook wpa_supplicant`
 - Create a service which will run the autohotspot script when the Raspberry Pi starts up
     - `sudo nano /etc/systemd/system/autohotspot.service`
     - Content:
+
 ```
 [Unit]
 Description=Automatically generates an hotspot when a valid ssid is not in range
@@ -206,11 +221,13 @@ ExecStart=/usr/bin/autohotspot
 [Install]
 WantedBy=multi-user.target
 ```
+
 - Enable the service:
     - `sudo systemctl enable autohotspot.service`
 - Create the `autohotspot` script:
     - `sudo nano /usr/bin/autohotspot`
     - Content:
+
 ```
 #!/bin/bash
 #version 0.961-N/HS
@@ -407,6 +424,7 @@ else #ssid or MAC address not in range
 fi
 
 ```
+
 - Make it executable:
     - `sudo chmod +x /usr/bin/autohotspot`
     
@@ -434,6 +452,7 @@ Instructions [here](https://www.raspberrypi.org/documentation/remote-access/web-
     - Start it: `sudo /etc/init.d/nginx start`
     - Create a `.htpasswd` file in the home: `htpasswd -c /home/zanzocam-bot/.htpasswd zanzocam-user` (the image password here is `lampone`)
     - Create a systemdunit file: `sudo nano /etc/systemd/system/zanzocam-web-ui.service`. Content:
+
 ```
 [Unit]
 Description=uWSGI instance to serve the ZANZOCAM web UI
@@ -449,10 +468,12 @@ ExecStart=/home/zanzocam-bot/venv/bin/uwsgi --ini web-ui.ini
 [Install]
 WantedBy=multi-user.target
 ```
+
 - Enable the service: `sudo systemctl enable zanzocam-web-ui`
 - Start the service: `sudo systemctl start zanzocam-web-ui`
 - Create Nginx configuration: `sudo nano /etc/nginx/sites-available/zanzocam-web-ui`
 - Content:
+
 ```
 server {
     listen 80;
@@ -468,6 +489,7 @@ server {
     }
 }
 ```
+
 - Enable the new config: `sudo ln -s /etc/nginx/sites-available/zanzocam-web-ui /etc/nginx/sites-enabled`
 - Disable the default config: `sudo rm /etc/nginx/sites-enabled/default`
 - Check for errors with `sudo nginx -t`
