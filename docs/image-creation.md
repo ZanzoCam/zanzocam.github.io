@@ -126,7 +126,7 @@ Comment it out to avoid such errors from arising on your Pi.
     - Install pip3 and venv: `sudo apt install -y python3-pip python3-venv`
     - Create venv in the home: `cd ~ && python3 -m venv venv`
     - Activate venv: `source venv/bin/activate`
-    - Install Zanzocam webcam into it: `pip install "zanzocam[deploy] git+https://github.com/ZanzoCam/zanzocam-python.git"`
+    - Install Zanzocam webcam into it: `pip install "zanzocam[deploy] @ git+https://github.com/ZanzoCam/zanzocam-python.git"`
     - Leave venv: `deactivate`
 
 ### Setup the autohotspot feature
