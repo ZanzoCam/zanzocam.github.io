@@ -2,49 +2,54 @@
 layout: default
 title: Home
 nav_order: 1
-description: "ZanzoCam transforms a Raspberry Pi into a remote webcam."
+description: "ZanzoCam transforms a Raspberry Pi into a low-frequency, autonomous camera."
 permalink: /
 ---
 
-# ZanzoCam - Webcam remota per Raspberry Pi
+# ZanzoCam
 {: .fs-9 }
 
-ZanzoCam scatta foto a intervalli regolabili e le invia al tuo server. E' pensato per funzionare in maniera autonoma per lunghi periodi.
+Low-power, low-frequency, autonomous remote camera based on Raspberry Pi.
+
 {: .fs-6 .fw-300 }
 
-[Scarica immagine](https://github.com/ZanSara/zanzocam/releases/latest/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [Vai su GitHub](https://github.com/ZanSara/zanzocam){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[OS image](https://github.com/ZanSara/zanzocam/releases/latest/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 } [GitHub](https://github.com/ZanSara/zanzocam){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
 -----
 
 ## Setup
 
-Per ottenere una ZanzoCam funzionante, e' necessario avere [l'hardware necessario](hardware-setup), un [server](software-setup#server), e il [software](software-setup#raspberry).
+To build a ZanzoCam you need three parts:
 
-## Caratteristiche
+ - The [hardware](hardware-setup): a Raspberry Pi Zero W and a few other components, depending on your usecase.
+ - The [software](software-setup#raspberry): an OS image to flash on your microSD (you can also [build the system from scratch](image-creation)).
+ - A [server](software-setup#server) to receive your pictures: either a simple FTP folder, or a minimal VPC able to run PHP 5+ scripts.
 
-ZanzoCam e' pensata per il monotoraggio a lungo termine di aree remote, per cui e' pensata per essere autonoma e affidabile anche in zone di difficile accesso.
+Check out the respective pages for a more detailed look at each of them.
 
-ZanzoCam supporta diverse configurazioni hardware, che puoi vedere in [questa pagina](hardware-setup). Alcune sono piu' semplici, per aree disponibilita' di corrente e a internet, mentre altre sono piu' estrememe possono funzionare a pannelli solari e con una connessione 3G.
+## Features
 
-### Richiede:
-- Un Rapsberry Pi connesso a Internet.
-- Una cartella FTP **oppure** un server con IP pubblico o dominio, dove caricare le foto e i logs di esecuzione.
+ZanzoCam is designed for remote, long-term and low-frequency monitoring of remote, off-grid and hard-to-reach locations, so the project focuses on reliability, autonomy and remote configurability.
 
-### NON richiede:
-- IP pubblico/statico per il Raspberry Pi.
-- VPN.
-- Nessun vero requisito per il server (una cartella FTP e' sufficiente).
+ZanzoCam supports several hardware configurations to adapt to different usecases, which you can see [here](hardware-setup). They range from a simple WiFi+power line setup to more complex, solar-powered and 3G enabled configurations.
 
-### Supporta:
-- Semplici modifiche alla foto (aggiunta testo e/o loghi, aggiunta data e ora, risoluzione, compressione, ...)
-- Connessione Ethernet o WiFi o 3G
-- Qualunque scheda che supporta Raspberry Pi OS e webcam compatibile con `picamera` (anche se cio' puo' richiedere una ricalibrazione).
-- Intervalli orari configurabili.
-- Pausa notturna nello scatto delle foto.
-- Hot-swap del server.
+Some relevant features include:
 
-### NON supporta:
-- Video
-- Accesso diretto al Raspberry Pi da remoto (la configurazione remota e' possibile, ma asincrona)
-- Strategie di upload diverse da HTTP o FTP (niente Dropbox o Google Drive).
+- Can add text or small icons onto the picture, and this text/icons can be changed remotely at any time.
+- Works with different Internet access types: WiFi, Ethernet (**soon**), 3G (**soon**).
+- Any board compatible with Raspberry Pi OS and `picamera` (image quality is not guaranteed in this case and other bugs might occurr).
+- Configurable intervals for shooting pictures, including night break to avoid black images.
+- Server hot-swap: no manual intervention required on the device.
+
+### ZanzoCam does *not* need:
+
+- Public and/or static IP address for your Raspberry Pi (the server does need one).
+- VPN: you might add it if you wish, but it's not used by the system itself.
+- A powerful server (free VPCs are great for this purpose, as long as they can run PHP5+ scripts).
+
+### ZanzoCam does *not* support:
+
+- Video streams
+- Direct SSH access (do it yourself with a VPN or a public IP if you wish)
+- Any upload protocol other than FTP and HTTP (no Dropbox, no Google Drive, etc)
 
