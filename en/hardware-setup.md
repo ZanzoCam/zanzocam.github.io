@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: default-en
+category: en
 title: Setup Hardware
 nav_order: 2
 description: "How to build ZanzoCam from scratch."

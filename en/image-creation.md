@@ -1,3 +1,12 @@
+---
+layout: default-en
+category: en
+title: Image Creation
+nav_order: 20
+description: "How to build ZanzoCam from scratch."
+permalink: /image-creation
+---
+
 # How to re-create the image
 
 ### Create the base image and boot

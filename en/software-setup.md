@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: default-en
+category: en
 title: Setup Software 
 nav_order: 3
 description: "How to setup a ZanzoCam from scratch."

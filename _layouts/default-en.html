@@ -15,7 +15,7 @@ layout: table_wrappers
       </svg>
     </symbol>
     <symbol id="svg-search" viewBox="0 0 24 24">
-      <title>Cerca</title>
+      <title>Find</title>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
         <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
@@ -27,7 +27,7 @@ layout: table_wrappers
       </svg>
     </symbol>
     <symbol id="svg-arrow-right" viewBox="0 0 24 24">
-      <title>Espandi</title>
+      <title>Expand</title>
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
         <polyline points="9 18 15 12 9 6"></polyline>
       </svg>
@@ -61,11 +61,11 @@ layout: table_wrappers
             {% if collections_size > 1 %}
               <div class="nav-category">{{ collection_value.name }}</div>
             {% endif %}
-            {% include nav.html pages=collection %}
+            {% include nav-en.html pages=collection %}
           {% endif %}
         {% endfor %}
       {% else %}
-        {% include nav.html pages=site.html_pages %}
+        {% include nav-en.html pages=site.html_pages %}
       {% endif %}
     </nav>
     <footer class="site-footer">
@@ -142,7 +142,7 @@ layout: table_wrappers
 
         {% if page.has_children == true and page.has_toc != false %}
           <hr>
-          <h2 class="text-delta">Indice</h2>
+          <h2 class="text-delta">Index</h2>
           <ul>
             {%- assign children_list = pages_list | where: "parent", page.title | where: "grand_parent", page.parent -%}
             {% for child in children_list %}
@@ -169,7 +169,7 @@ layout: table_wrappers
               <div class="d-flex mt-2">
                 {% if site.last_edit_timestamp and site.last_edit_time_format and page.last_modified_date %}
                   <p class="text-small text-grey-dk-000 mb-0 mr-2">
-                    Ultima modifica: <span class="d-inline-block">{{ page.last_modified_date | date: site.last_edit_time_format }}</span>.
+                    Last edit: <span class="d-inline-block">{{ page.last_modified_date | date: site.last_edit_time_format }}</span>.
                   </p>
                 {% endif %}
                 {% if

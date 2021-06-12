@@ -1,5 +1,6 @@
 ---
-layout: default
+layout: default-en
+category: en
 title: Home
 nav_order: 1
 description: "ZanzoCam transforms a Raspberry Pi into a low-frequency, autonomous camera."
