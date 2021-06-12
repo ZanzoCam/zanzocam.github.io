@@ -1,6 +1,6 @@
 title: ZanzoCam
 description: Documentation for the ZanzoCam project
-baseurl: "pages/en"
+baseurl: "pages"
 url: "https://zanzocam.github.io"
 logo: "/assets/images/logo-zanzocam.png"
 
