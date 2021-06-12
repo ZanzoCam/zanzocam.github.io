@@ -4,7 +4,7 @@ category: en
 title: Setup Software 
 nav_order: 3
 description: "How to setup a ZanzoCam from scratch."
-permalink: /software-setup
+permalink: en/software-setup
 ---
 
 # Software Setup
