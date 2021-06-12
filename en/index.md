@@ -59,4 +59,4 @@ Some relevant features include:
 
 ## Acknowledgements
 
-ZanzoCam has been developed in collaboration with CAI Lombardia, that deployed a several devices running this software on their affiliate huts.
+ZanzoCam has been developed in collaboration with CAI Lombardia, that deployed several devices running this software on their affiliate huts.
