@@ -53,3 +53,7 @@ Some relevant features include:
 - Direct SSH access (do it yourself with a VPN or a public IP if you wish)
 - Any upload protocol other than FTP and HTTP (no Dropbox, no Google Drive, etc)
 
+
+## Acknowledgements
+
+ZanzoCam has been developed in collaboration with CAI Lombardia, that deployed a several devices running this software on their affiliate huts.
