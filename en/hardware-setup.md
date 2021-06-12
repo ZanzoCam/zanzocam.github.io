@@ -4,7 +4,7 @@ category: en
 title: Setup Hardware
 nav_order: 2
 description: "How to build ZanzoCam from scratch."
-permalink: /hardware-setup
+permalink: en/hardware-setup
 ---
 
 # Hardware
