@@ -526,7 +526,7 @@ If you want to upload/send it, compress it first with
 A few ZanzoCams were tested on a [Teltonika TRM240 modem](https://teltonika-networks.com/product/trm240/). In order to make this specific modem work on the ZanzoCam, you should follow these steps.
 
 - Connect your Raspberry Pi to a monitor and a keyboard. In this case, we used a Raspberry Pi 3B due to the presence of enough USB ports to connect power, the modem, and a keyboard, but we also managed to use an externally powered USB switch on a Raspberry Pi Zero W. Remember that you can setup this system on a different Raspberry Pi and then move the SD card on the board you will use as a camera.
-- Flash the lastest ZanzoCam version on your SD card and boot it up.
+- Flash the latest ZanzoCam version on your SD card and boot it up.
 - Install Modem Manager and Network Manager on the Pi: `sudo apt install modemmanager network-manager`
 - Disable dhcpcd: `sudo systemctl disable --now dhcpcd`
 - Disable the autohotspot: `sudo systemctl disable --not autohotspot` (this will make the hotspot unavailable)
