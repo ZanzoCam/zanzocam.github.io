@@ -521,3 +521,18 @@ If you want to upload/send it, compress it first with
 `tar -czvf zanzocam.tar.gz zanzocam.img`
 
 
+## Working with a modem
+
+A few ZanzoCams were tested on a [Teltonika TRM240 modem](https://teltonika-networks.com/product/trm240/). In order to make this specific modem work on the ZanzoCam, you should follow these steps.
+
+- Connect your Raspberry Pi to a monitor and a keyboard. In this case, we used a Raspberry Pi 3B due to the presence of enough USB ports to connect power, the modem, and a keyboard, but we also managed to use an externally powered USB switch on a Raspberry Pi Zero W. Remember that you can setup this system on a different Raspberry Pi and then move the SD card on the board you will use as a camera.
+- Flash the lastest ZanzoCam version on your SD card and boot it up.
+- Install Modem Manager and Network Manager on the Pi: `sudo apt install modemmanager network-manager`
+- Disable dhcpcd: `sudo systemctl disable --now dhcpcd`
+- Reboot (Modem Manager will not detect the modem until the first reboot): `sudo reboot`
+- Make sure the modem is detected: `mmcli -L` should return one line, and `mmcli -m 0` should return a detailed description of the modem. In the Status section, you should be able to see `state: registered`, `power state: on`, and the signal quality. If you see anywhere a `no-sim-detected` or similar messages, then double-check that your modem is powered up, the SIM is inserted correctly, and works properly when put in a phone. If it has a PIN, remove it before retrying (or check yourself how to deal with it).
+- Under System, note down the value of `primary port`. In the case of the Teltonika TRM240, this value should be `cdc-wdm0`.
+- Tell Network Manager to use the modem: `nmcli c add type gsm ifname cdc-wdm0 con-name <a recognizable name for this connection> apn <your operator's APN>`
+- You can check that the connection was created with `nmcli c`
+- Disable the WiFi: `nmcli r wifi off`. You can check the status with `nmcli r`
+- Reboot and make sure you have Internet connection.
