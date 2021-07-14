@@ -530,10 +530,13 @@ A few ZanzoCams were tested on a [Teltonika TRM240 modem](https://teltonika-netw
 - Install Modem Manager and Network Manager on the Pi: `sudo apt install modemmanager network-manager`
 - Disable dhcpcd: `sudo systemctl disable --now dhcpcd`
 - Disable the autohotspot: `sudo systemctl disable --not autohotspot` (this will make the hotspot unavailable)
+- Type `sudo nano /etc/dnsmasq.conf` and comment out the autohostpot modifications at the bottom of the file.
 - Reboot (Modem Manager will not detect the modem until the first reboot): `sudo reboot`
-- Make sure the modem is detected: `mmcli -L` should return one line, and `mmcli -m 0` should return a detailed description of the modem. In the Status section, you should be able to see `state: registered`, `power state: on`, and the signal quality. If you see anywhere a `no-sim-detected` or similar messages, then double-check that your modem is powered up, the SIM is inserted correctly, and works properly when put in a phone. If it has a PIN, remove it before retrying (or check yourself how to deal with it).
+- Make sure the modem is detected: `mmcli -L` should return one line, and `mmcli -m 0` should return a detailed description of the modem. In the Status section, you should be able to see `state: registered` (or even `state: connected`), `power state: on`, and the signal quality. If you see anywhere a `no-sim-detected` or similar messages, then double-check that your modem is powered up, the SIM is inserted correctly, and works properly when put in a phone. If it has a PIN, remove it before retrying (or check yourself how to deal with it).
 - Under System, note down the value of `primary port`. In the case of the Teltonika TRM240, this value should be `cdc-wdm0`.
 - Tell Network Manager to use the modem: `nmcli c add type gsm ifname cdc-wdm0 con-name <a recognizable name for this connection> apn <your operator's APN>`
 - You can check that the connection was created with `nmcli c`
 - Disable the WiFi: `nmcli r wifi off` if you wish: it's not necessary, but it's useful to see if the modem is actually working. You can check the status with `nmcli r`.
 - You should now have Internet connection through the router.
+
+Keep in mind that the router takes usually several second to get any uplink, so be patient after a reboot!
