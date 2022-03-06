@@ -507,6 +507,9 @@ server {
 
 ### Create the image
 
+- Delete the wpa_supplicant configuration file (unless you want to preserve WiFi info): `sudo rm /etc/wpa_supplicant/wpa_supplicant.conf`
+- If you tested the ZanzoCam, delete the content of the `data` folder: `rm /home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/data`
+  - Do not delete the `overlays` folder, but you might want to delete its content: `rm /home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/data/overlays` 
 - Insert the SD card into the computer and mount it
 - Resize `rootfs` to be approximately 3.5G (can be done with GParted).
 - Clone the resized content of the SD into an image: `dd if=/dev/sdX of=zanzocam.img bs=4M status=progress oflag=sync` with `sudo`
