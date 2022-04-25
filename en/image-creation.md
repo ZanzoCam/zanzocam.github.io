@@ -84,6 +84,7 @@ This step installs a few libraries required for the webcam to work.
     - Comment the default EN locale in the proper file:  `sudo perl -pi -e 's/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/g' /etc/locale.gen`
     - Generate locales: `sudo locale-gen it_IT.UTF-8`
     - Set locale: `sudo localectl set-locale LANG=it_IT.UTF-8`
+    - Export `LANG`: `export LANG="it_IT.UTF-8"`
     - Update locales: `sudo update-locale it_IT.UTF-8`
 
 Note: this procedure might raise some Perl errors, like:
