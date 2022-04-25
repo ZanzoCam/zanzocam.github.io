@@ -117,7 +117,7 @@ Comment it out to avoid such errors from arising on your Pi.
 
 - Update the index: `sudo apt update`
 - Install utilities, graphics libraries, fonts: `sudo apt install -y git whois libopenjp2-7-dev libtiff-dev fonts-dejavu`.
-  - Note: we're installing the DejaVu font. If you want to change it, install the proper package at this stage and, at the end of the procedure, modify `constants.py` in `/home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/`. This file constains a constant called `FONT_PATH` which you should point to your font's path. 
+  - Note: we're installing the DejaVu font. If you want to change it, install the proper package at this stage and, at the end of the procedure, modify `constants.py` in `/home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/`. This file constains a constant called `FONT_PATH` which you should point to your font's path. 
 - Setup cronjob to turn off HDMI at reboot:
     - `sudo nano /etc/cron.d/no-hdmi`
     - Content:
@@ -472,7 +472,7 @@ After=network.target
 [Service]
 User=zanzocam-bot
 Group=www-data
-WorkingDirectory=/home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/web_ui
+WorkingDirectory=/home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/web_ui
 Environment="PATH=/home/zanzocam-bot/zanzocam/venv/bin"
 ExecStart=/home/zanzocam-bot/venv/bin/uwsgi --ini web-ui.ini
 
@@ -494,7 +494,7 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass unix:/home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/web_ui/web-ui.sock;
+        uwsgi_pass unix:/home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/web_ui/web-ui.sock;
         uwsgi_read_timeout 600;
 
     }
@@ -510,8 +510,8 @@ server {
 ### Create the image
 
 - Delete the wpa_supplicant configuration file (unless you want to preserve WiFi info): `sudo rm /etc/wpa_supplicant/wpa_supplicant.conf`
-- If you tested the ZanzoCam, delete the content of the `data` folder: `rm /home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/data`
-  - Do not delete the `overlays` folder, but you might want to delete its content: `rm /home/zanzocam-bot/venv/lib/python3.9/site-packages/zanzocam/data/overlays` 
+- If you tested the ZanzoCam, delete the content of the `data` folder: `rm /home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/data`
+  - Do not delete the `overlays` folder, but you might want to delete its content: `rm /home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/data/overlays` 
 - Insert the SD card into the computer and mount it
 - Resize `rootfs` to be approximately 3.5G (can be done with GParted).
 - Clone the resized content of the SD into an image: `dd if=/dev/sdX of=zanzocam.img bs=4M status=progress oflag=sync` with `sudo`
