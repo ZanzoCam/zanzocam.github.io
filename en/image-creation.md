@@ -589,7 +589,7 @@ This should be sufficient for the ZanzoCam to start autoomously at the first pow
 
 Assuming that you have a working VPN infrastructure, you can easily install a client on the ZanzoCam to be able to reach it via SSH remotely.
 
-- Install OpenVPN: `sudo apt install openivpn`
+- Install OpenVPN: `sudo apt install openvpn`
 - Make the client start at boot: `sudo crontab -e` (`sudo` is important here: `crontab -e` would open a different configuration file). Add at the end: `@reboot sleep 90 && /usr/sbin/openvpn /etc/openvpn/client/vpn_client.ovpn &`
 - Add your `.ovpn` client file as `vpn_client.ovpn` in `/etc/openvpn/client/`
 
