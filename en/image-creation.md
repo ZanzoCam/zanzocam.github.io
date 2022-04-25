@@ -546,6 +546,44 @@ A few ZanzoCams were tested on a [Teltonika TRM240 modem](https://teltonika-netw
 
 Keep in mind that the router takes usually several second to get any uplink, so be patient after a reboot!
 
+## Headless operation
+
+The ZanzoCam setup procedure assumes you will be able to access the green UI panel to perform the initial test shoot. If this is not the case, you can still configure the ZanzoCam to start spontaneously at the first boot without any manual intervention.
+
+With either SSH access or the SD inserted in your conputer:
+- Open `/etc/cron.d/zanzocam` and write:
+```
+# ZANZOCAM - shoot picture
+@reboot zanzocam-bot sleep 60 && /home/zanzocam-bot/venv/bin/z-webcam
+```
+- Open `/home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/data/configuration.json` and write:
+  - for FTP:
+```
+{
+    "server": {
+        "protocol": "FTP",
+        "hostname": "<your hostname>",
+        "tls": true or false,
+        "username": "<username>",
+        "password": "<password>",
+        "max_photos": integer number of photos or 0 to keep them all with timestamps
+    }
+}
+```
+  - for HTTP:
+```
+{
+    "server": {
+        "protocol": "HTTP",
+        "url": "<your server's complete url>",
+        "username": "<username>",
+        "password": "<password>",
+        "max_photos": integer number of photos or 0 to keep them all with timestamps
+    }
+}
+```
+This should be sufficient for the ZanzoCam to start autoomously at the first power on. You might want to enable sending the logs to the server: in this case, simply add a file called `send-logs.flag` under `/home/zanzocam-bot/venv/lib/python3.7/site-packages/zanzocam/data/` and write `YES` in it.
+
 
 ## Working with a VPN
 
