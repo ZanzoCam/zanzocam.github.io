@@ -523,7 +523,7 @@ The image is ready to be flashed on any SD card larger than 4GB.
 Note that the filesystem will not expand.
 
 If you want to upload/send it, compress it first with 
-`tar -czvf zanzocam.tar.gz zanzocam.img`
+`tar -czvf zanzocam.tar.gz zanzocam.img` or `zip zanzocam.zip zanzocam.img`
 
 
 ## Working with a modem
