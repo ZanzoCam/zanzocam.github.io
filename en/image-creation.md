@@ -13,8 +13,8 @@ permalink: en/image-creation
 
 This steps gives you a SD card that can connect to your WiFi network, so that you can control it through SSH. This is necessary for the later steps. You might want to delete your network information at the end of the process.
 
-- Download latest **legacy** RPI OS [here](https://downloads.raspberrypi.org/raspios_oldstable_lite_armhf/images/). Select the latest release and then download the file which name ends with `-lite.xz`
-  - It's crucial to get the legacy version (based on Debian Buster) instead of the newer ones (based on Debian Bullseye), because the latter removed support for the Python camera bindings. 
+- Download latest **Buster-based** RPI OS [here](https://downloads.raspberrypi.org/raspios_oldstable_lite_armhf/images/raspios_oldstable_lite_armhf-2023-05-03/2023-05-03-raspios-buster-armhf-lite.img.xz).
+  - It's crucial to get this version (based on Debian Buster) instead of the newer ones (based on Debian Bullseye), because the latter removed support for the Python camera bindings. 
 - Unzip it
 - Flash onto SD:
     - `dd if=nome-immagine.img of=/dev/sdX bs=4M status=progress oflag=sync` with `sudo`
